@@ -20,16 +20,15 @@ def confirmed_email_notification(sender, **kwargs):
     """
     subject_template_name = 'shop_simplenotifications/confirmed_subject.txt'
     body_template_name = 'shop_simplenotifications/confirmed_body.txt'
-    request = kwargs.get('request')
     order = kwargs.get('order')
     subject = loader.render_to_string(
         subject_template_name,
-        RequestContext(request, {'order': order})
+         {'order': order}
     )
     subject = subject.join(subject.splitlines())
     body = loader.render_to_string(
         body_template_name,
-        RequestContext(request, {'order': order})
+        {'order': order}
     )
     from_email = getattr(settings, 'SN_FROM_EMAIL',
                          settings.DEFAULT_FROM_EMAIL)
@@ -49,16 +48,16 @@ def payment_instructions_email_notification(sender, **kwargs):
             'shop_simplenotifications/payment_instructions_subject.txt'
     body_template_name = \
             'shop_simplenotifications/payment_instructions_body.txt'
-    request = kwargs.get('request')
+
     order = kwargs.get('order')
     subject = loader.render_to_string(
         subject_template_name,
-        RequestContext(request, {'order': order})
+        {'order': order}
     )
     subject = subject.join(subject.splitlines())
     body = loader.render_to_string(
         body_template_name,
-        RequestContext(request, {'order': order})
+        {'order': order}
     )
     from_email = getattr(settings, 'SN_FROM_EMAIL',
                          settings.DEFAULT_FROM_EMAIL)
